@@ -5,7 +5,8 @@ output: html_notebook
 
 This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Shift+Enter*. 
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *
+Shift+Enter*. 
 
 ```{r}
 plot(cars)
@@ -19,6 +20,18 @@ The preview shows you a rendered HTML copy of the contents of the editor. Conseq
 
 
 #Importing Dataset
-dataset <- read.csv('Data.csv')
+data <- read.csv('Data.csv')
+
+# Taking Care Of Missing Values
+data$Age = ifelse(is.na(data$Age),
+                  ave(data$Age, FUN = function(x) mean(x, na.rm = TRUE)),
+                  data$Age)
+                  
+data$Slary = ifelse(is.na(data$Salary),
+                    ave(data$Salary, FUN = function(x) {                                        mean(x,na.rm=TRUE)}),
+                    data$Salary)
+                  
+
+
 
 
