@@ -27,10 +27,29 @@ data$Age = ifelse(is.na(data$Age),
                   ave(data$Age, FUN = function(x) mean(x, na.rm = TRUE)),
                   data$Age)
                   
-data$Slary = ifelse(is.na(data$Salary),
+data$Salary = ifelse(is.na(data$Salary),
                     ave(data$Salary, FUN = function(x) {                                        mean(x,na.rm=TRUE)}),
                     data$Salary)
                   
+# Encoding Categorical Variables
+
+data$Country = factor(data$Country,
+                      levels = c("France", "Spain", "Germany"),
+                      labels = c(1, 2, 3))
+                
+data$Purchased = factor(data$Purchased,
+                        levels = c("Yes", "No"),
+                        labels = c(1, 0))
+                        
+#Splitting Dataset Into Test Set And Train Set
+#install.packages('caTools')
+#library(caTools)
+
+set.seed(123)
+split = sample.split(data$Purchased, SplitRatio = 0.8)
+trainSet = subset(data, split == TRUE)
+testSet = subset(data, split == FALSE)
+
 
 
 
